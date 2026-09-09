@@ -8,6 +8,7 @@ type Project = {
   description: string;
   details: string;
   status: string;
+  github?: string;
 };
 
 const projects: Project[] = [
@@ -20,6 +21,7 @@ const projects: Project[] = [
     details:
       "Project ini merupakan eksperimen membangun sistem AI/ML sendiri menggunakan C++. Mencakup tokenizer, training, inference, model serialization, dan beberapa eksperimen transformer-style.",
     status: "Eksperimental",
+    github: "https://github.com/rizztzy21/zall.dev",
   },
   {
     number: "02",
@@ -30,6 +32,7 @@ const projects: Project[] = [
     details:
       "Zall Hub dibuat sebagai kumpulan tools berbasis web dengan fokus pada tampilan yang sederhana, responsif, dan mudah digunakan.",
     status: "Development",
+    github: "https://github.com/rizztzy21/zall-hub",
   },
   {
     number: "03",
@@ -50,6 +53,7 @@ const projects: Project[] = [
     details:
       "Kumpulan project dan eksperimen Android menggunakan Android SDK, Gradle, serta berbagai pengujian dan eksplorasi pada perangkat Android.",
     status: "Ongoing",
+    github: "https://github.com/rizztzy21/android-dev-studio",
   },
 ];
 
@@ -262,13 +266,27 @@ function App() {
                 </p>
               </div>
 
-              <button
-                className="project-detail"
-                onClick={() => setSelectedProject(project)}
-              >
-                <span>Lihat Detail</span>
-                <span>↗</span>
-              </button>
+              <div className="project-actions">
+                <button
+                  className="project-detail"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <span>Lihat Detail</span>
+                  <span>↗</span>
+                </button>
+
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-github"
+                  >
+                    <span>Source Code</span>
+                    <span>↗</span>
+                  </a>
+                )}
+              </div>
             </article>
           ))}
         </div>
