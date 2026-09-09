@@ -1,0 +1,11 @@
+{
+  "name": "Rizal Faisal | Developer",
+  "short_name": "RF.DEV",
+  "description": "Rizal Faisal Developer Hub",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060a",
+  "theme_color": "#05060a",
+  "orientation": "portrait-primary",
+  "icons": []
+}
