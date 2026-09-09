@@ -16,38 +16,34 @@ const projects: Project[] = [
     number: "01",
     title: "ZallAI",
     tech: ["C++", "Machine Learning", "CMake"],
-    description:
-      "Eksperimen AI/ML yang dikembangkan dari awal menggunakan C++.",
+    description: "Eksperimen AI/ML yang dikembangkan dari awal menggunakan C++.",
     details:
-      "Project ini merupakan eksperimen membangun sistem AI/ML sendiri menggunakan C++. Mencakup tokenizer, training, inference, model serialization, dan beberapa eksperimen transformer-style.",
-    status: "Eksperimental",
+      "Project eksperimen membangun sistem AI/ML sendiri menggunakan C++. Mencakup tokenizer, training, inference, model serialization, dan eksperimen transformer-style.",
+    status: "Experimental",
   },
   {
     number: "02",
     title: "Zall Hub",
     tech: ["React", "TypeScript", "Vite"],
-    description:
-      "Web application berisi berbagai tools yang dikembangkan secara modular.",
+    description: "Web application berisi berbagai tools yang dikembangkan secara modular.",
     details:
-      "Zall Hub dibuat sebagai kumpulan tools berbasis web dengan fokus pada tampilan yang sederhana, responsif, dan mudah digunakan.",
+      "Kumpulan tools berbasis web dengan fokus pada tampilan sederhana, responsif, modular, dan mudah digunakan.",
     status: "Development",
   },
   {
     number: "03",
     title: "Media Downloader API",
     tech: ["Node.js", "FFmpeg", "yt-dlp"],
-    description:
-      "Backend API untuk pemrosesan media dengan integrasi FFmpeg dan yt-dlp.",
+    description: "Backend API untuk pemrosesan media dengan integrasi FFmpeg dan yt-dlp.",
     details:
-      "Backend service yang menangani request pemrosesan media dan mengintegrasikan berbagai utility untuk processing serta pengelolaan file media.",
+      "Backend service untuk menangani request pemrosesan media serta mengintegrasikan berbagai utility untuk processing dan pengelolaan file media.",
     status: "Development",
   },
   {
     number: "04",
     title: "Android Projects",
     tech: ["Android", "Gradle", "Java/Kotlin"],
-    description:
-      "Berbagai eksperimen dan pengembangan aplikasi Android.",
+    description: "Berbagai eksperimen dan pengembangan aplikasi Android.",
     details:
       "Kumpulan project dan eksperimen Android menggunakan Android SDK, Gradle, serta berbagai pengujian dan eksplorasi pada perangkat Android.",
     status: "Ongoing",
@@ -57,23 +53,33 @@ const projects: Project[] = [
     number: "05",
     title: "ZControl",
     tech: ["Android", "Kotlin", "Gradle"],
-    description:
-      "Aplikasi Android yang dikembangkan dengan Kotlin dan Gradle.",
+    description: "Aplikasi Android yang dikembangkan dengan Kotlin dan Gradle.",
     details:
-      "ZControl merupakan project Android dengan struktur native berbasis Kotlin dan Gradle, termasuk konfigurasi build serta workflow GitHub Actions.",
+      "Project Android native berbasis Kotlin dan Gradle, termasuk konfigurasi build serta workflow pengembangan melalui Git.",
     status: "Ongoing",
     github: "https://github.com/rizztzy21/ZControl",
   },
+];
 
+const skills = [
+  ["01", "C++", "System & AI"],
+  ["02", "Python", "Automation"],
+  ["03", "JavaScript", "Web & Backend"],
+  ["04", "TypeScript", "Modern Web"],
+  ["05", "React", "Frontend"],
+  ["06", "Node.js", "Backend & API"],
+  ["07", "Android", "Mobile"],
+  ["08", "Linux", "Development"],
 ];
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeNav, setActiveNav] = useState("home");
 
   useEffect(() => {
-    const duration = 1200;
+    const duration = 1300;
     const start = performance.now();
 
     const animate = (now: number) => {
@@ -85,7 +91,7 @@ function App() {
       if (value < 100) {
         requestAnimationFrame(animate);
       } else {
-        setTimeout(() => setLoading(false), 250);
+        setTimeout(() => setLoading(false), 350);
       }
     };
 
@@ -93,20 +99,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const elements = document.querySelectorAll(".reveal");
+    const sections = document.querySelectorAll("section[id]");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            setActiveNav(entry.target.id);
             entry.target.classList.add("visible");
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.18 }
     );
 
-    elements.forEach((element) => observer.observe(element));
+    sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
   }, []);
@@ -119,12 +126,33 @@ function App() {
     };
   }, [selectedProject]);
 
+  useEffect(() => {
+    const move = (event: MouseEvent) => {
+      document.documentElement.style.setProperty("--mouse-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${event.clientY}px`);
+    };
+
+    window.addEventListener("mousemove", move);
+
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
   return (
     <main>
-      {/* LOADING */}
+      {/* LOADER */}
       <div className={`loader ${loading ? "" : "loader-hidden"}`}>
+        <div className="loader-noise" />
+
         <div className="loader-content">
-          <p className="loader-name">RIZAL FAISAL</p>
+          <div className="loader-top">
+            <span>RF.DEV</span>
+            <span>2026</span>
+          </div>
+
+          <div className="loader-center">
+            <div className="loader-symbol">RF</div>
+            <p>RIZAL FAISAL</p>
+          </div>
 
           <div className="loader-bar">
             <div
@@ -134,7 +162,7 @@ function App() {
           </div>
 
           <div className="loader-info">
-            <span>INITIALIZING PORTFOLIO</span>
+            <span>INITIALIZING SYSTEM</span>
             <span>{progress}%</span>
           </div>
         </div>
@@ -142,71 +170,75 @@ function App() {
 
       {/* NAVBAR */}
       <nav className="navbar">
-        <a href="#" className="nav-logo">
-          RF.
+        <a href="#home" className="nav-logo">
+          RF<span>.</span>
         </a>
 
         <div className="nav-links">
-          <a href="#about">Tentang</a>
-          <a href="#projects">Proyek</a>
-          <a href="#skills">Keahlian</a>
+          {[
+            ["home", "Home"],
+            ["about", "Tentang"],
+            ["projects", "Proyek"],
+            ["skills", "Skill"],
+          ].map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={activeNav === id ? "active" : ""}
+            >
+              {label}
+            </a>
+          ))}
         </div>
 
         <a href="#contact" className="nav-contact">
-          Kontak
+          Let's Talk <span>↗</span>
         </a>
       </nav>
 
       {/* HERO */}
-      <section className="hero">
+      <section id="home" className="hero reveal visible">
         <div className="hero-grid" />
-
         <div className="hero-glow glow-one" />
         <div className="hero-glow glow-two" />
 
-        <div className="particles">
-          {Array.from({ length: 28 }).map((_, index) => (
-            <span
-              key={index}
-              className="particle"
-              style={
-                {
-                  "--i": index,
-                } as React.CSSProperties
-              }
-            />
-          ))}
+        <div className="hero-lines">
+          <span />
+          <span />
+          <span />
         </div>
 
         <div className="hero-orbit">
           <div className="orbit-ring ring-one" />
           <div className="orbit-ring ring-two" />
-          <div className="orbit-core" />
+          <div className="orbit-core">
+            <span>RF</span>
+          </div>
         </div>
 
         <div className="hero-content">
-          <p className="eyebrow hero-item item-one">
-            HELLO, I'M
-          </p>
+          <div className="availability">
+            <span className="status-dot" />
+            AVAILABLE FOR WORK
+          </div>
 
-          <h1 className="hero-title">
-            <span className="hero-name hero-item item-two">
-              Rizal Faisal
-            </span>
+          <p className="eyebrow">HELLO, I'M</p>
 
-            <span className="hero-role hero-item item-three">
-              | Developer
-            </span>
+          <h1>
+            <span className="hero-name">Rizal</span>
+            <span className="hero-name outline">Faisal</span>
+            <span className="hero-role">| Developer</span>
           </h1>
 
-          <p className="description hero-item item-four">
-            Membangun sesuatu, mempelajari cara kerjanya,
-            dan terus berkembang melalui setiap proyek.
+          <p className="description">
+            Developer yang suka membangun sesuatu dari nol,
+            mengeksplorasi teknologi, dan mencari tahu bagaimana
+            sesuatu bekerja di balik layar.
           </p>
 
-          <div className="actions hero-item item-five">
+          <div className="actions">
             <a href="#projects" className="button primary">
-              Lihat Proyek <span>↗</span>
+              Explore Projects <span>↗</span>
             </a>
 
             <a
@@ -220,44 +252,103 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-side-note">
-          <span>[ 01 ]</span>
-          <span>BUILD</span>
-          <span>EXPLORE</span>
-          <span>LEARN</span>
-          <span>IMPROVE</span>
+        <div className="hero-meta">
+          <span>BASED IN</span>
+          <strong>INDONESIA</strong>
+          <span>FOCUS</span>
+          <strong>CODE / BUILD / LEARN</strong>
         </div>
 
-        <a href="#projects" className="scroll-explore">
+        <a href="#about" className="scroll-explore">
           <span>SCROLL TO EXPLORE</span>
-
           <div className="scroll-line">
             <div className="scroll-dot" />
           </div>
-
-          <span className="scroll-arrow">↓</span>
+          <span>↓</span>
         </a>
+      </section>
+
+      {/* MARQUEE */}
+      <div className="marquee">
+        <div className="marquee-track">
+          <span>BUILD</span>
+          <b>✦</b>
+          <span>EXPLORE</span>
+          <b>✦</b>
+          <span>CREATE</span>
+          <b>✦</b>
+          <span>LEARN</span>
+          <b>✦</b>
+          <span>IMPROVE</span>
+          <b>✦</b>
+          <span>BUILD</span>
+          <b>✦</b>
+          <span>EXPLORE</span>
+          <b>✦</b>
+          <span>CREATE</span>
+          <b>✦</b>
+          <span>LEARN</span>
+          <b>✦</b>
+        </div>
+      </div>
+
+      {/* ABOUT */}
+      <section id="about" className="about reveal">
+        <div className="section-heading">
+          <p className="eyebrow">01 / ABOUT ME</p>
+          <h2>Tentang Saya</h2>
+        </div>
+
+        <div className="about-layout">
+          <div className="about-content">
+            <p className="about-text">
+              Saya adalah seorang developer yang senang mempelajari
+              teknologi dan membangun berbagai proyek dari nol.
+            </p>
+
+            <p className="about-text muted">
+              Saya menikmati proses mencoba hal baru, memahami
+              bagaimana sesuatu bekerja, lalu mengubah ide menjadi
+              sesuatu yang benar-benar bisa digunakan.
+            </p>
+          </div>
+
+          <div className="stats">
+            <div className="stat">
+              <strong>05+</strong>
+              <span>PROJECTS</span>
+            </div>
+
+            <div className="stat">
+              <strong>08+</strong>
+              <span>TECHNOLOGIES</span>
+            </div>
+
+            <div className="stat">
+              <strong>∞</strong>
+              <span>THINGS TO LEARN</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* PROJECTS */}
       <section id="projects" className="projects reveal">
         <div className="section-heading">
-          <p className="eyebrow">SELECTED WORK</p>
+          <p className="eyebrow">02 / SELECTED WORK</p>
           <h2>Proyek</h2>
-          <p>
-            Beberapa proyek yang pernah saya bangun dan eksplorasi.
-          </p>
+          <p>Beberapa hal yang pernah saya bangun dan eksplorasi.</p>
         </div>
 
         <div className="project-grid">
           {projects.map((project) => (
             <article className="project-card" key={project.number}>
-              <div className="project-top">
-                <span className="project-number">
-                  {project.number}
-                </span>
+              <div className="project-card-bg" />
 
+              <div className="project-top">
+                <span className="project-number">{project.number}</span>
                 <span className="project-status">
+                  <i />
                   {project.status}
                 </span>
               </div>
@@ -281,7 +372,7 @@ function App() {
                   className="project-detail"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <span>Lihat Detail</span>
+                  <span>VIEW CASE</span>
                   <span>↗</span>
                 </button>
 
@@ -292,7 +383,7 @@ function App() {
                     rel="noreferrer"
                     className="project-github"
                   >
-                    <span>Source Code</span>
+                    <span>SOURCE</span>
                     <span>↗</span>
                   </a>
                 )}
@@ -302,53 +393,26 @@ function App() {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="about reveal">
-        <div className="section-heading">
-          <p className="eyebrow">ABOUT ME</p>
-          <h2>Tentang Saya</h2>
-        </div>
-
-        <div className="about-content">
-          <p className="about-text">
-            Saya adalah seorang developer yang senang mempelajari
-            teknologi dan membangun berbagai proyek dari nol.
-          </p>
-
-          <p className="about-text muted">
-            Saya menikmati proses mencoba hal baru, mencari tahu
-            bagaimana sesuatu bekerja, dan mengembangkan solusi
-            melalui proyek-proyek yang saya kerjakan sendiri.
-          </p>
-        </div>
-      </section>
-
       {/* SKILLS */}
       <section id="skills" className="skills reveal">
         <div className="section-heading">
-          <p className="eyebrow">TECHNOLOGIES</p>
-          <h2>Keahlian</h2>
+          <p className="eyebrow">03 / TECHNOLOGIES</p>
+          <h2>Tech Stack</h2>
           <p>
-            Teknologi yang saya gunakan dan eksplorasi dalam berbagai
-            proyek.
+            Tools dan teknologi yang saya gunakan untuk membangun
+            berbagai project.
           </p>
         </div>
 
         <div className="skills-grid">
-          {[
-            ["01", "C++", "System & AI Development"],
-            ["02", "Python", "Automation & Development"],
-            ["03", "JavaScript", "Web & Backend"],
-            ["04", "TypeScript", "Modern Web Development"],
-            ["05", "React", "Frontend Development"],
-            ["06", "Node.js", "Backend & API"],
-            ["07", "Android", "Mobile Development"],
-            ["08", "Linux", "Development Environment"],
-          ].map(([number, title, description]) => (
+          {skills.map(([number, title, description]) => (
             <div className="skill" key={number}>
               <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+              <strong>↗</strong>
             </div>
           ))}
         </div>
@@ -356,28 +420,59 @@ function App() {
 
       {/* CONTACT */}
       <section id="contact" className="contact reveal">
-        <p className="eyebrow">GET IN TOUCH</p>
+        <div className="contact-orb" />
 
-        <h2>Mari buat sesuatu.</h2>
+        <p className="eyebrow">04 / GET IN TOUCH</p>
 
-        <p>
-          Punya ide, proyek, atau sekadar ingin ngobrol soal teknologi?
+        <h2>
+          Mari buat
+          <br />
+          sesuatu<span>.</span>
+        </h2>
+
+        <p className="contact-copy">
+          Punya ide, project, atau sekadar ingin ngobrol soal
+          teknologi? Jangan ragu untuk menghubungi saya.
         </p>
 
-        <a
-          href="mailto:rizzcasanno@gmail.com"
-          className="contact-email"
-        >
-          rizzcasanno@gmail.com ↗
-        </a>
+        <div className="contact-links">
+          <a href="mailto:rizzcasanno@gmail.com">
+            <span>EMAIL</span>
+            <strong>rizzcasanno@gmail.com</strong>
+            <i>↗</i>
+          </a>
+
+          <a
+            href="https://github.com/rizztzy21"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>GITHUB</span>
+            <strong>@rizztzy21</strong>
+            <i>↗</i>
+          </a>
+
+          <a href="https://discord.com" target="_blank" rel="noreferrer">
+            <span>DISCORD</span>
+            <strong>@kaijentiji</strong>
+            <i>↗</i>
+          </a>
+        </div>
       </section>
 
+      {/* FOOTER */}
       <footer>
-        <span>© 2026 Rizal Faisal</span>
-        <span>Built with React + TypeScript</span>
+        <div>
+          <strong>RF.</strong>
+          <span>Rizal Faisal</span>
+        </div>
+
+        <span>© 2026 — Built with React + TypeScript</span>
+
+        <a href="#home">BACK TO TOP ↑</a>
       </footer>
 
-      {/* PROJECT MODAL */}
+      {/* MODAL */}
       {selectedProject && (
         <div
           className="modal-backdrop"
@@ -396,7 +491,7 @@ function App() {
             </button>
 
             <span className="modal-number">
-              {selectedProject.number}
+              {selectedProject.number} / PROJECT
             </span>
 
             <h2>{selectedProject.title}</h2>
@@ -415,6 +510,17 @@ function App() {
               <span>STATUS</span>
               <strong>{selectedProject.status}</strong>
             </div>
+
+            {selectedProject.github && (
+              <a
+                href={selectedProject.github}
+                target="_blank"
+                rel="noreferrer"
+                className="modal-source"
+              >
+                VIEW SOURCE CODE ↗
+              </a>
+            )}
           </div>
         </div>
       )}
