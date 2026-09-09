@@ -21,7 +21,6 @@ const projects: Project[] = [
     details:
       "Project ini merupakan eksperimen membangun sistem AI/ML sendiri menggunakan C++. Mencakup tokenizer, training, inference, model serialization, dan beberapa eksperimen transformer-style.",
     status: "Eksperimental",
-    github: "https://github.com/rizztzy21/zall.dev",
   },
   {
     number: "02",
@@ -32,7 +31,6 @@ const projects: Project[] = [
     details:
       "Zall Hub dibuat sebagai kumpulan tools berbasis web dengan fokus pada tampilan yang sederhana, responsif, dan mudah digunakan.",
     status: "Development",
-    github: "https://github.com/rizztzy21/zall-hub",
   },
   {
     number: "03",
@@ -55,6 +53,18 @@ const projects: Project[] = [
     status: "Ongoing",
     github: "https://github.com/rizztzy21/android-dev-studio",
   },
+  {
+    number: "05",
+    title: "ZControl",
+    tech: ["Android", "Kotlin", "Gradle"],
+    description:
+      "Aplikasi Android yang dikembangkan dengan Kotlin dan Gradle.",
+    details:
+      "ZControl merupakan project Android dengan struktur native berbasis Kotlin dan Gradle, termasuk konfigurasi build serta workflow GitHub Actions.",
+    status: "Ongoing",
+    github: "https://github.com/rizztzy21/ZControl",
+  },
+
 ];
 
 function App() {
