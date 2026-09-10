@@ -5672,3 +5672,946 @@ button {
     animation: none;
   }
 }
+
+/* ================================
+   GITHUB HUB
+================================ */
+
+.github-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 150px 20px 100px;
+}
+
+.github-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.github-container {
+  position: relative;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.github-hero {
+  max-width: 760px;
+}
+
+.github-hero h1 {
+  margin: 18px 0;
+  font-size: clamp(48px, 9vw, 100px);
+  line-height: .88;
+  letter-spacing: -.06em;
+}
+
+.github-hero h1 span {
+  opacity: .28;
+}
+
+.github-hero p {
+  max-width: 620px;
+  margin: 0 0 28px;
+  color: rgba(255,255,255,.48);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.github-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 80px 0;
+  border-top: 1px solid rgba(255,255,255,.09);
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.github-overview > div {
+  padding: 24px;
+  border-right: 1px solid rgba(255,255,255,.09);
+}
+
+.github-overview > div:last-child {
+  border-right: 0;
+}
+
+.github-overview small,
+.github-footer-note span {
+  display: block;
+  color: rgba(255,255,255,.3);
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+.github-overview strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+
+.github-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.github-section-head h2 {
+  margin: 8px 0 0;
+  font-size: clamp(24px, 4vw, 42px);
+  letter-spacing: -.04em;
+}
+
+.github-count {
+  color: rgba(255,255,255,.3);
+  font-size: 9px;
+  letter-spacing: .15em;
+}
+
+.github-repo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.github-card {
+  min-height: 250px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  background: rgba(255,255,255,.025);
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.github-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.04);
+}
+
+.github-card-top,
+.github-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.github-repo-number {
+  color: rgba(255,255,255,.25);
+  font-size: 9px;
+}
+
+.github-status {
+  padding: 5px 7px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 5px;
+  color: rgba(255,255,255,.5);
+  font-size: 7px;
+  letter-spacing: .12em;
+}
+
+.github-status.archived {
+  opacity: .4;
+}
+
+.github-card h3 {
+  margin: 30px 0 10px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.03em;
+}
+
+.github-card p {
+  min-height: 52px;
+  margin: 0;
+  color: rgba(255,255,255,.42);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.github-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 24px 0;
+  color: rgba(255,255,255,.38);
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+.github-card-bottom {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.github-card-bottom small {
+  color: rgba(255,255,255,.25);
+  font-size: 7px;
+  letter-spacing: .1em;
+}
+
+.github-card-bottom a {
+  color: rgba(255,255,255,.7);
+  font-size: 8px;
+  letter-spacing: .12em;
+  text-decoration: none;
+}
+
+.github-card-bottom a:hover {
+  color: #fff;
+}
+
+.github-state {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 50px 20px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.github-state strong {
+  font-size: 10px;
+  letter-spacing: .15em;
+}
+
+.github-state span {
+  color: rgba(255,255,255,.35);
+  font-size: 10px;
+}
+
+.github-error {
+  border-color: rgba(255,100,100,.18);
+}
+
+.github-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: githubPulse 1.3s ease-in-out infinite alternate;
+}
+
+.github-skeleton span {
+  display: block;
+  height: 12px;
+  width: 65%;
+  border-radius: 5px;
+  background: rgba(255,255,255,.07);
+}
+
+.github-skeleton span:nth-child(2) {
+  width: 90%;
+  height: 40px;
+}
+
+.github-skeleton span:nth-child(3) {
+  width: 45%;
+}
+
+@keyframes githubPulse {
+  from { opacity: .45; }
+  to { opacity: 1; }
+}
+
+.github-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.github-footer-note strong {
+  font-size: 9px;
+  letter-spacing: .15em;
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .github-page {
+    padding: 125px 15px 80px;
+  }
+
+  .github-overview {
+    margin: 55px 0;
+  }
+
+  .github-overview > div {
+    padding: 17px 12px;
+  }
+
+  .github-overview strong {
+    font-size: 21px;
+  }
+
+  .github-repo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .github-section-head {
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .github-card {
+    min-height: 230px;
+  }
+
+  .github-footer-note {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .github-card,
+  .github-skeleton {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ================================
+   SYSTEM STATUS
+================================ */
+
+.status-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 150px 20px 100px;
+}
+
+.status-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.status-container {
+  position: relative;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.status-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.status-hero h1 {
+  margin: 18px 0;
+  font-size: clamp(48px, 9vw, 100px);
+  line-height: .88;
+  letter-spacing: -.06em;
+}
+
+.status-hero h1 span {
+  opacity: .28;
+}
+
+.status-hero p {
+  max-width: 600px;
+  margin: 0;
+  color: rgba(255,255,255,.45);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.status-orb {
+  flex: 0 0 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 50%;
+  background: rgba(255,255,255,.02);
+  box-shadow: 0 0 70px rgba(100,255,180,.05);
+}
+
+.status-orb span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7dffb2;
+  box-shadow: 0 0 22px rgba(125,255,178,.8);
+  animation: statusPulse 1.8s ease-in-out infinite;
+}
+
+.status-orb strong {
+  font-size: 9px;
+  letter-spacing: .18em;
+  font-weight: 500;
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: .45;
+    transform: scale(.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.status-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 80px 0;
+  border-top: 1px solid rgba(255,255,255,.09);
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.status-summary > div {
+  padding: 25px;
+  border-right: 1px solid rgba(255,255,255,.09);
+}
+
+.status-summary > div:last-child {
+  border-right: 0;
+}
+
+.status-summary small {
+  display: block;
+  color: rgba(255,255,255,.3);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.status-summary strong {
+  display: block;
+  margin-top: 9px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.status-section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.status-section-head h2 {
+  margin: 8px 0 0;
+  font-size: clamp(25px, 4vw, 42px);
+  letter-spacing: -.04em;
+}
+
+.status-live {
+  color: rgba(125,255,178,.7);
+  font-size: 8px;
+  letter-spacing: .13em;
+}
+
+.status-list {
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.status-service {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 23px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: background .2s ease;
+}
+
+.status-service:hover {
+  background: rgba(255,255,255,.025);
+}
+
+.status-service-number {
+  width: 30px;
+  color: rgba(255,255,255,.22);
+  font-size: 9px;
+}
+
+.status-service-info {
+  flex: 1;
+}
+
+.status-service-info h3 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+
+.status-service-info p {
+  margin: 0;
+  color: rgba(255,255,255,.32);
+  font-size: 9px;
+}
+
+.status-service-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7dffb2;
+  box-shadow: 0 0 12px rgba(125,255,178,.55);
+}
+
+.status-service-state strong {
+  color: rgba(125,255,178,.7);
+  font-size: 8px;
+  letter-spacing: .12em;
+  font-weight: 500;
+}
+
+.status-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.status-info h2 {
+  margin: 10px 0 0;
+  font-size: clamp(25px, 4vw, 45px);
+  letter-spacing: -.04em;
+}
+
+.status-info-copy p {
+  margin: 0 0 15px;
+  color: rgba(255,255,255,.38);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.status-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 70px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  color: rgba(255,255,255,.28);
+  font-size: 7px;
+  letter-spacing: .13em;
+}
+
+.status-footer strong {
+  color: rgba(125,255,178,.65);
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .status-page {
+    padding: 125px 15px 80px;
+  }
+
+  .status-main {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-orb {
+    flex-basis: auto;
+    width: 105px;
+    height: 105px;
+    align-self: flex-end;
+  }
+
+  .status-summary {
+    margin: 55px 0;
+  }
+
+  .status-summary > div {
+    padding: 17px 11px;
+  }
+
+  .status-summary strong {
+    font-size: 10px;
+  }
+
+  .status-service {
+    gap: 10px;
+    padding: 20px 5px;
+  }
+
+  .status-service-number {
+    display: none;
+  }
+
+  .status-service-info h3 {
+    font-size: 11px;
+  }
+
+  .status-service-info p {
+    font-size: 8px;
+  }
+
+  .status-service-state strong {
+    font-size: 7px;
+  }
+
+  .status-info {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 70px;
+  }
+
+  .status-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-orb span {
+    animation: none;
+  }
+
+  .status-service {
+    transition: none;
+  }
+}
+
+/* ================================
+   CHANGELOG + RELEASE CENTER
+================================ */
+
+.changelog-page,
+.releases-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 150px 20px 100px;
+}
+
+.changelog-grid,
+.releases-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .4;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.changelog-container,
+.releases-container {
+  position: relative;
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
+
+.changelog-hero,
+.releases-hero {
+  max-width: 760px;
+}
+
+.changelog-hero h1,
+.releases-hero h1 {
+  margin: 18px 0;
+  font-size: clamp(48px, 9vw, 100px);
+  line-height: .88;
+  letter-spacing: -.06em;
+}
+
+.changelog-hero h1 span,
+.releases-hero h1 span {
+  opacity: .28;
+}
+
+.changelog-hero p,
+.releases-hero p {
+  max-width: 600px;
+  margin: 0;
+  color: rgba(255,255,255,.44);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* CHANGELOG */
+
+.changelog-timeline {
+  position: relative;
+  margin-top: 90px;
+  padding-left: 45px;
+}
+
+.changelog-timeline::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,.1);
+}
+
+.changelog-entry {
+  position: relative;
+  padding-bottom: 70px;
+}
+
+.changelog-marker {
+  position: absolute;
+  left: -45px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+  background: #05060a;
+}
+
+.changelog-marker span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 0 14px rgba(255,255,255,.4);
+}
+
+.changelog-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: rgba(255,255,255,.3);
+  font-size: 8px;
+  letter-spacing: .14em;
+}
+
+.changelog-content h2 {
+  margin: 15px 0 22px;
+  font-size: clamp(24px, 4vw, 38px);
+  letter-spacing: -.04em;
+}
+
+.changelog-content ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.changelog-content li {
+  padding: 11px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  color: rgba(255,255,255,.42);
+  font-size: 11px;
+}
+
+.changelog-content li::before {
+  content: "+";
+  display: inline-block;
+  width: 25px;
+  color: rgba(255,255,255,.7);
+}
+
+.changelog-footer,
+.releases-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.28);
+  font-size: 8px;
+  letter-spacing: .14em;
+}
+
+.changelog-footer strong,
+.releases-footer strong {
+  color: rgba(255,255,255,.6);
+  font-weight: 400;
+}
+
+/* RELEASES */
+
+.release-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 90px;
+}
+
+.release-card {
+  display: flex;
+  gap: 22px;
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 15px;
+  background: rgba(255,255,255,.025);
+  transition: .2s ease;
+}
+
+.release-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.17);
+  background: rgba(255,255,255,.04);
+}
+
+.release-number {
+  padding-top: 3px;
+  color: rgba(255,255,255,.2);
+  font-size: 9px;
+}
+
+.release-main {
+  flex: 1;
+}
+
+.release-top,
+.release-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.release-top > span:first-child {
+  color: rgba(255,255,255,.38);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.release-status {
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.release-status.stable {
+  color: rgba(125,255,178,.7);
+}
+
+.release-status.beta {
+  color: rgba(255,255,255,.55);
+}
+
+.release-status.experimental {
+  color: rgba(255,255,255,.32);
+}
+
+.release-card h2 {
+  margin: 22px 0 8px;
+  font-size: 28px;
+  letter-spacing: -.04em;
+  font-weight: 400;
+}
+
+.release-card p {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(255,255,255,.4);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.release-bottom {
+  margin-top: 25px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.release-bottom span {
+  color: rgba(255,255,255,.25);
+  font-size: 7px;
+  letter-spacing: .12em;
+}
+
+.release-bottom strong {
+  color: rgba(255,255,255,.5);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .1em;
+}
+
+@media (max-width: 700px) {
+  .changelog-page,
+  .releases-page {
+    padding: 125px 15px 80px;
+  }
+
+  .changelog-timeline,
+  .release-list {
+    margin-top: 60px;
+  }
+
+  .changelog-timeline {
+    padding-left: 35px;
+  }
+
+  .changelog-marker {
+    left: -35px;
+  }
+
+  .changelog-meta {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .release-card {
+    padding: 19px;
+    gap: 12px;
+  }
+
+  .release-number {
+    display: none;
+  }
+
+  .release-top,
+  .release-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .changelog-footer,
+  .releases-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .release-card {
+    transition: none;
+  }
+}
