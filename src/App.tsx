@@ -9,6 +9,10 @@ import Projects from "./pages/Projects";
 import Android from "./pages/Android";
 import Lab from "./pages/Lab";
 import NotFound from "./pages/NotFound";
+import Github from "./pages/Github";
+import Status from "./pages/Status";
+import Changelog from "./pages/Changelog";
+import Releases from "./pages/Releases";
 import Footer from "./components/Footer";
 import Terminal from "./pages/Terminal";
 import Api from "./pages/Api";
@@ -109,7 +113,11 @@ function PageWrapper() {
         <Route path="/api" element={<Api />} />
         <Route path="*" element={<NotFound />} />
           <Route path="/tools" element={<Tools />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/github" element={<Github />} />
+        <Route path="/status" element={<Status />} />
+        <Route path="/changelog" element={<Changelog />} />
+        <Route path="/releases" element={<Releases />} />
+        <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </main>

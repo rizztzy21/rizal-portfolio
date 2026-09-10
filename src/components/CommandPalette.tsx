@@ -16,6 +16,10 @@ const commands: Command[] = [
   { label: "Tools", path: "/tools", description: "Developer utilities" },
   { label: "API Playground", path: "/api", description: "Test API endpoints" },
   { label: "Terminal", path: "/terminal", description: "Interactive terminal" },
+  { label: "System Status", path: "/status", description: "Live system status" },
+  { label: "Changelog", path: "/changelog", description: "Build history" },
+  { label: "Release Center", path: "/releases", description: "Project releases" },
+  { label: "GitHub", path: "/github", description: "GitHub Hub" },
   { label: "Contact", path: "/contact", description: "Get in touch" },
 ];
 
