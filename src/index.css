@@ -6615,3 +6615,798 @@ button {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   PHASE 4 — GLOBAL UI SYSTEM
+   ========================================================= */
+
+:root {
+  --rf-bg: #05060a;
+  --rf-surface: rgba(255, 255, 255, 0.035);
+  --rf-surface-strong: rgba(255, 255, 255, 0.065);
+  --rf-border: rgba(255, 255, 255, 0.09);
+  --rf-border-hover: rgba(255, 255, 255, 0.18);
+  --rf-text: #f5f7fb;
+  --rf-muted: #8c93a3;
+  --rf-dim: #555d6d;
+  --rf-accent: #8ea2ff;
+  --rf-accent-soft: rgba(142, 162, 255, 0.14);
+  --rf-success: #71e6a1;
+  --rf-danger: #ff7185;
+
+  --rf-radius-sm: 10px;
+  --rf-radius-md: 16px;
+  --rf-radius-lg: 24px;
+
+  --rf-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.35);
+
+  --rf-transition:
+    220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* smoother global interaction */
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  transition:
+    transform var(--rf-transition),
+    border-color var(--rf-transition),
+    background var(--rf-transition),
+    color var(--rf-transition),
+    opacity var(--rf-transition);
+}
+
+/* unified focus state */
+:focus-visible {
+  outline: 1px solid var(--rf-accent);
+  outline-offset: 4px;
+}
+
+/* premium glass surface */
+.glass-surface {
+  background: var(--rf-surface);
+  border: 1px solid var(--rf-border);
+  border-radius: var(--rf-radius-md);
+  box-shadow: var(--rf-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* subtle lift */
+.interactive-card {
+  transition:
+    transform var(--rf-transition),
+    border-color var(--rf-transition),
+    background var(--rf-transition),
+    box-shadow var(--rf-transition);
+}
+
+.interactive-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--rf-border-hover);
+  background: var(--rf-surface-strong);
+  box-shadow: var(--rf-shadow);
+}
+
+/* premium buttons */
+.primary-btn,
+.secondary-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.primary-btn::after,
+.secondary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-105%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: transform 500ms ease;
+  pointer-events: none;
+}
+
+.primary-btn:hover::after,
+.secondary-btn:hover::after {
+  transform: translateX(105%);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* section reveal helper */
+.rf-reveal {
+  animation: rfReveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rfReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* stagger helpers */
+.rf-delay-1 { animation-delay: 80ms; }
+.rf-delay-2 { animation-delay: 160ms; }
+.rf-delay-3 { animation-delay: 240ms; }
+.rf-delay-4 { animation-delay: 320ms; }
+
+/* cleaner text selection */
+::selection {
+  background: rgba(142, 162, 255, 0.24);
+  color: var(--rf-text);
+}
+
+/* mobile touch tuning */
+@media (max-width: 720px) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  .interactive-card:hover {
+    transform: none;
+  }
+
+  .primary-btn:hover,
+  .secondary-btn:hover {
+    transform: none;
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* =========================================================
+   PHASE 4 — CINEMATIC BACKGROUND 2.0
+   ========================================================= */
+
+body {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(142, 162, 255, 0.075),
+      transparent 38%
+    ),
+    #05060a;
+}
+
+/* deep ambient light */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -25%;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(142, 162, 255, 0.055),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 82% 65%,
+      rgba(108, 130, 255, 0.045),
+      transparent 25%
+    );
+  filter: blur(45px);
+  animation: rfAmbient 14s ease-in-out infinite alternate;
+}
+
+/* cinematic grid */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 82%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 82%
+  );
+  animation: rfGrid 18s linear infinite;
+}
+
+/* subtle star field */
+#root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.65) 0.7px, transparent 0.8px),
+    radial-gradient(circle, rgba(255,255,255,0.42) 0.6px, transparent 0.7px);
+  background-size: 97px 97px, 151px 151px;
+  background-position: 12px 28px, 64px 83px;
+  animation: rfStars 24s linear infinite;
+}
+
+/* cinematic edge */
+.page-transition::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 48%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
+}
+
+@keyframes rfAmbient {
+  from {
+    transform: translate3d(-1%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1%, 1%, 0) scale(1.04);
+  }
+}
+
+@keyframes rfGrid {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 0 56px, 56px 0;
+  }
+}
+
+@keyframes rfStars {
+  from {
+    background-position: 12px 28px, 64px 83px;
+  }
+
+  to {
+    background-position: 109px 125px, 215px 234px;
+  }
+}
+
+@media (max-width: 720px) {
+  body::before {
+    filter: blur(30px);
+    opacity: 0.8;
+  }
+
+  body::after {
+    background-size: 42px 42px;
+    opacity: 0.12;
+  }
+
+  #root::before {
+    opacity: 0.28;
+    background-size: 83px 83px, 137px 137px;
+  }
+
+  .page-transition::after {
+    background:
+      radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0, 0, 0, 0.22) 100%
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  #root::before {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   PHASE 4 — NAVIGATION 2.0
+   ========================================================= */
+
+.navbar {
+  transition:
+    background 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease;
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 0;
+  height: 1px;
+  transform: translateX(-50%);
+  background: currentColor;
+  transition: width 220ms ease;
+  opacity: 0.9;
+}
+
+.nav-links a:hover::before,
+.nav-links a.active::before {
+  width: 70%;
+}
+
+.nav-links a.active {
+  color: var(--rf-text, #f5f7fb);
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -9px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--rf-accent, #8ea2ff);
+  box-shadow: 0 0 10px var(--rf-accent, #8ea2ff);
+}
+
+.nav-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  color: var(--rf-dim, #555d6d);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.nav-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--rf-success, #71e6a1);
+  box-shadow: 0 0 9px rgba(113, 230, 161, 0.8);
+  animation: navPulse 2s ease-in-out infinite;
+}
+
+@keyframes navPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.nav-menu {
+  position: relative;
+  z-index: 101;
+}
+
+.nav-menu span {
+  transition:
+    transform 220ms ease,
+    opacity 180ms ease;
+}
+
+.nav-menu.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-menu.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav-backdrop {
+  transition:
+    opacity 260ms ease,
+    visibility 260ms ease,
+    backdrop-filter 260ms ease;
+}
+
+/* prevent background scroll while mobile menu is open */
+body.nav-open {
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .nav-meta {
+    display: none;
+  }
+
+  .nav-links a.active::after {
+    right: auto;
+    left: 0;
+    top: 50%;
+  }
+}
+
+@media (max-width: 720px) {
+  .navbar {
+    z-index: 100;
+  }
+
+  .nav-links {
+    padding: 92px 28px 30px;
+    gap: 4px;
+  }
+
+  .nav-links a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+  }
+
+  .nav-links a.active {
+    background: rgba(255, 255, 255, 0.045);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-links a::before {
+    display: none;
+  }
+
+  .nav-links a.active::after {
+    width: 4px;
+    height: 18px;
+    left: 6px;
+    border-radius: 4px;
+    box-shadow: 0 0 12px var(--rf-accent, #8ea2ff);
+  }
+
+  .nav-menu {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-live-dot {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   PHASE 4 — MICRO INTERACTIONS
+   ========================================================= */
+
+.rf-scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--rf-delay, 0ms);
+}
+
+.rf-scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* magnetic-feel card */
+.project-card,
+.android-card,
+.lab-card,
+.release-card,
+.github-card {
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease;
+}
+
+.project-card:hover,
+.android-card:hover,
+.lab-card:hover,
+.release-card:hover,
+.github-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.32),
+    0 0 30px rgba(142, 162, 255, 0.035);
+}
+
+/* interactive arrows */
+a svg,
+button svg {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a:hover svg,
+button:hover svg {
+  transform: translateX(3px);
+}
+
+/* subtle image/visual zoom */
+.project-card img,
+.android-card img,
+.github-card img {
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover img,
+.android-card:hover img,
+.github-card:hover img {
+  transform: scale(1.025);
+}
+
+/* buttons press feedback */
+button:active,
+.primary-btn:active,
+.secondary-btn:active {
+  transform: scale(0.97);
+}
+
+/* nav links */
+.nav-links a {
+  transition:
+    color 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.nav-links a:hover {
+  transform: translateY(-1px);
+}
+
+/* status indicator */
+.status-orb,
+.status-dot,
+.service-status-dot {
+  animation: rfStatusPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes rfStatusPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* hover glow for RF branding */
+.nav-logo {
+  transition:
+    color 220ms ease,
+    text-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.nav-logo:hover {
+  transform: translateY(-1px);
+  text-shadow:
+    0 0 18px rgba(142, 162, 255, 0.32);
+}
+
+/* mobile: don't lift cards */
+@media (max-width: 720px) {
+  .project-card:hover,
+  .android-card:hover,
+  .lab-card:hover,
+  .release-card:hover,
+  .github-card:hover {
+    transform: none;
+  }
+
+  .project-card:hover img,
+  .android-card:hover img,
+  .github-card:hover img {
+    transform: none;
+  }
+
+  .rf-scroll-reveal {
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .status-orb,
+  .status-dot,
+  .service-status-dot {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   PHASE 4 — MOBILE UX 2.0
+   ========================================================= */
+
+@media (max-width: 720px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    min-width: 0;
+  }
+
+  main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* safer mobile containers */
+  section,
+  header,
+  footer {
+    max-width: 100%;
+  }
+
+  /* prevent long technical strings from forcing overflow */
+  code,
+  pre,
+  .terminal-output,
+  .api-response,
+  .github-card,
+  .release-card {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* comfortable page rhythm */
+  .page-transition {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* touch-friendly controls */
+  button,
+  .primary-btn,
+  .secondary-btn,
+  .nav-links a {
+    min-height: 44px;
+  }
+
+  /* prevent accidental tiny text */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* modal safety */
+  .modal,
+  .modal-overlay,
+  .project-modal,
+  .lab-modal {
+    max-width: 100vw;
+  }
+
+  /* horizontal lists can scroll instead of breaking layout */
+  .filters,
+  .filter-list,
+  .tech-filters {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filters::-webkit-scrollbar,
+  .filter-list::-webkit-scrollbar,
+  .tech-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* keep headings inside viewport */
+  h1,
+  h2,
+  h3,
+  p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  /* avoid expensive visual effects on small screens */
+  .glass-surface {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-links {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  h1 {
+    letter-spacing: -0.04em;
+  }
+}
