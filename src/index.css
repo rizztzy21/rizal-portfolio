@@ -7410,3 +7410,27 @@ button:active,
     letter-spacing: -0.04em;
   }
 }
+
+
+/* =========================================================
+   NAVIGATION HOTFIX — MOBILE LAYERING
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .navbar {
+    z-index: 1000;
+  }
+
+  .nav-links {
+    z-index: 1001;
+    padding: 10px;
+  }
+
+  .nav-menu {
+    z-index: 1002;
+  }
+
+  .nav-backdrop {
+    z-index: 999;
+  }
+}
