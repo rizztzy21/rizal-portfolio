@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
+import CommandPalette from "./components/CommandPalette";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -9,6 +10,8 @@ import Android from "./pages/Android";
 import Lab from "./pages/Lab";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import Terminal from "./pages/Terminal";
+import Api from "./pages/Api";
 import Tools from "./pages/Tools";
 import Contact from "./pages/Contact";
 
@@ -93,6 +96,7 @@ function PageWrapper() {
   return (
     <>
       <Navbar />
+      <CommandPalette />
 
       <main key={location.pathname} className="page-transition">
         <Routes>
@@ -101,6 +105,8 @@ function PageWrapper() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/android" element={<Android />} />
           <Route path="/lab" element={<Lab />} />
+        <Route path="/terminal" element={<Terminal />} />
+        <Route path="/api" element={<Api />} />
         <Route path="*" element={<NotFound />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/contact" element={<Contact />} />
